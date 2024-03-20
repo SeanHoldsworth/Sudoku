@@ -1,0 +1,32 @@
+This comes from problem 96 of Project Euler. I solved the problem using the
+simplest algorithm I could think of and which happened to run within the time
+constraints required. The simple algorithm isn't particularly fast and there
+must be better ways of solving these problems; hence the code here.
+
+Data files:
+
+sudoku.txt - reformated version of the Project Euler data set (50 puzzles)
+sudoku17.txt - 49151 puzzles with only 17 given numbers in each puzzle.
+top95.txt - 95 very hard puzzles
+
+Solving this problem was an introduction to constraint propagation. One
+characteristic of these types of problem is that generating the next node
+of the search tree has large side effects on the state so that it is not
+practical to just save the incremental state change and backtrack. Instead it's
+simpler to save the entire state and discard it if that path is discarded.
+
+One thought about this is that Clojure with its native persistent data types
+would be a very good fit for this kind of problem. If solving it with another
+language such as Python, then thought must be given to how efficiently the
+entire state of a position can be copied.
+
+I came back to look at this code after nearly two years and found it mostly
+unreadable and confusing. I'm going to use Git to try and impose some order on
+it and go through commenting things until I understand it all again.
+
+Looking at the various versions, it seems that various complicated strategies
+were tried (naked twins etc.), but the final version used in the web app was
+much simpler and quicker, using just constraint propagation and searching.
+
+I've commented the final version of the code which is in sudoku.py and written
+a driver to exercise the code which is in main.py
